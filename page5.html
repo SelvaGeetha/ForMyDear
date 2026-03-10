@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Final Surprise</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
+color:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100vh;
+text-align:center;
+overflow:hidden;
+cursor:url("https://cur.cursors-4u.net/cursors/cur-2/cur116.cur"),auto;
+}
+
+/* message card */
+
+.message{
+max-width:650px;
+font-size:22px;
+line-height:1.7;
+padding:40px;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+transition:0.4s;
+}
+
+.message:hover{
+box-shadow:0 0 40px #e0aaff;
+transform:scale(1.05);
+}
+
+/* 3D birthday text */
+
+.birthday3d{
+font-size:45px;
+margin-top:30px;
+display:none;
+font-weight:bold;
+color:#ffd6ff;
+
+text-shadow:
+0 0 10px #fff,
+0 0 20px #e0aaff,
+0 0 30px #c77dff,
+0 0 40px #7209b7;
+
+animation:pop 1s ease, glow 2s infinite alternate;
+}
+
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1);}
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #fff,0 0 20px #c77dff;}
+to{text-shadow:0 0 25px #fff,0 0 40px #e0aaff;}
+}
+
+/* falling hearts */
+
+.big-heart{
+position:absolute;
+font-size:70px;
+cursor:pointer;
+animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+0%{top:-100px;}
+100%{top:40vh;}
+}
+
+/* fireworks hearts */
+
+.fire-heart{
+position:absolute;
+font-size:24px;
+animation:explode 1.5s linear forwards;
+}
+
+@keyframes explode{
+
+0%{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
+
+100%{
+transform:translate(var(--x),var(--y)) scale(1.5);
+opacity:0;
+}
+
+}
+
+/* confetti */
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+top:0;
+animation:confettiFall 4s linear forwards;
+}
+
+@keyframes confettiFall{
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
+}
+
+/* butterflies */
+
+.butterfly{
+position:absolute;
+font-size:26px;
+animation:fly 12s linear infinite;
+opacity:0.8;
+}
+
+@keyframes fly{
+
+0%{transform:translateX(-10vw) translateY(80vh);}
+50%{transform:translateX(50vw) translateY(30vh);}
+100%{transform:translateX(110vw) translateY(70vh);}
+
+}
+
+/* redirect button */
+
+button{
+margin-top:40px;
+padding:14px 35px;
+font-size:18px;
+background:#c77dff;
+border:none;
+border-radius:30px;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px #e0aaff;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<div class="message">
+
+<h1>One Last Thing 💜🎁</h1>
+
+<p>
+
+🌸 Meeting you was unexpected...  
+but the memories we created are **priceless**.
+
+😂 From laughter…  
+😢 to emotional conversations…
+
+Every moment became a **beautiful memory**.
+
+Thank you for being such a **special part**  
+of my college journey 🤝✨
+
+</p>
+
+</div>
+
+<div class="birthday3d" id="birthdayText">
+🎂 Once Again Happy Birthday 💜✨
+</div>
+
+<button onclick="location.href='index.html'">
+🔁 Start Again 💜
+</button>
+
+<script>
+
+/* falling hearts */
+
+function createHeart(){
+
+let heart=document.createElement("div");
+heart.className="big-heart";
+heart.innerHTML="💜";
+
+heart.style.left=Math.random()*90+"vw";
+
+document.body.appendChild(heart);
+
+/* auto blast when halfway */
+
+setTimeout(()=>{
+blast(heart);
+},3000);
+
+}
+
+/* heart explosion */
+
+function blast(heart){
+
+for(let i=0;i<25;i++){
+
+let h=document.createElement("div");
+h.className="fire-heart";
+h.innerHTML="💜";
+
+let x=(Math.random()-0.5)*300+"px";
+let y=(Math.random()-0.5)*300+"px";
+
+h.style.setProperty('--x',x);
+h.style.setProperty('--y',y);
+
+h.style.left=heart.offsetLeft+"px";
+h.style.top="40vh";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+h.remove();
+},1500);
+
+}
+
+heart.remove();
+
+showBirthday();
+
+}
+
+/* birthday message */
+
+function showBirthday(){
+
+document.getElementById("birthdayText").style.display="block";
+
+/* confetti */
+
+for(let i=0;i<40;i++){
+
+let conf=document.createElement("div");
+conf.className="confetti";
+
+conf.style.left=Math.random()*100+"vw";
+conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
+
+document.body.appendChild(conf);
+
+setTimeout(()=>{
+conf.remove();
+},4000);
+
+}
+
+}
+
+/* spawn hearts */
+
+setInterval(createHeart,3000);
+
+/* butterflies */
+
+function createButterfly(){
+
+let b=document.createElement("div");
+b.className="butterfly";
+b.innerHTML="🦋";
+
+b.style.fontSize=(20+Math.random()*20)+"px";
+b.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(b);
+
+setTimeout(()=>{
+b.remove();
+},12000);
+
+}
+
+setInterval(createButterfly,2000);
+
+</script>
+
+</body>
+</html>

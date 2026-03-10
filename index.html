@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy Birthday</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+}
+
+/* container */
+
+.container{
+max-width:700px;
+z-index:2;
+}
+
+/* title */
+
+h1{
+font-size:45px;
+}
+
+/* button */
+
+.cta-button{
+margin-top:30px;
+padding:15px 35px;
+font-size:18px;
+background:#c77dff;
+border:none;
+border-radius:30px;
+color:white;
+cursor:pointer;
+transition:0.4s;
+}
+
+.cta-button:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #e0aaff;
+background:#e0aaff;
+}
+
+/* cursor */
+.typing-text{
+font-size:22px;
+margin-top:20px;
+width:100%;
+overflow:hidden;
+white-space:nowrap;
+animation:typing 4s steps(40,end), blink 0.7s infinite;
+color:#f3d5ff;
+font-weight:500;
+}
+
+/* typing animation */
+
+@keyframes typing{
+from{width:0}
+to{width:100%}
+}
+
+/* cursor blink */
+
+@keyframes blink{
+50%{border-color:transparent}
+}
+.cursor{
+position:fixed;
+font-size:24px;
+pointer-events:none;
+z-index:3;
+}
+
+/* floating icons */
+
+.floating{
+position:absolute;
+animation:floatUp linear infinite;
+opacity:0.9;
+}
+
+@keyframes floatUp{
+
+0%{
+transform:translateY(100vh) rotate(0deg);
+opacity:0;
+}
+
+30%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-10vh) rotate(360deg);
+opacity:0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor">💜</div>
+
+<div class="container">
+
+<h1>Happy Birthday Yazhu Dear 🎂💜</h1>
+
+<p class="typing-text">
+Life introduced you as a junior💜
+
+<br>
+but my heart accepted you as a sister.
+
+From an unexpected junior in life 💜<br>
+to the most lovely sister my heart could ever find 💜<br><br>
+
+What started as a simple connection became something truly special.<br>
+Your kindness, your laughter, and your beautiful soul<br>
+turned a small bond into a forever place in my heart ✨<br><br>
+
+Some people come into life by chance,<br>
+but stay as family by love.<br>
+And you… will always be my lovely sister 💖
+</p>
+<button class="cta-button" onclick="goNext()">
+Beautyfull Start 💜
+</button>
+
+</div>
+
+<script>
+
+/* cursor heart */
+
+const cursor=document.querySelector(".cursor");
+
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+/* page navigation */
+
+function goNext(){
+window.location.href="page2.html";
+}
+
+/* floating background generator */
+
+const emojis=["💜","💖","💕","🌸","✨","💫"];
+
+function createFloating(){
+
+const el=document.createElement("div");
+el.className="floating";
+
+el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+
+el.style.left=Math.random()*100+"vw";
+
+el.style.fontSize=(20+Math.random()*25)+"px";
+
+el.style.animationDuration=(6+Math.random()*8)+"s";
+
+document.body.appendChild(el);
+
+setTimeout(()=>{
+el.remove();
+},14000);
+
+}
+
+/* create many floating elements */
+
+setInterval(createFloating,300);
+
+</script>
+
+</body>
+</html>
