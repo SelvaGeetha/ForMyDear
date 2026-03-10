@@ -2,198 +2,158 @@
 <html>
 <head>
 <title>Our Memories</title>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <style>
 
 body{
-margin:0;
-font-family:Segoe UI;
-background:linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
-color:white;
-text-align:center;
-overflow-x:hidden;
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
 }
 
 /* heading */
-
 h1{
-margin-top:40px;
-font-size:40px;
+  margin-top:40px;
+  font-size:40px;
 }
 
 .camera{
-display:inline-block;
-animation:floatIcon 3s infinite ease-in-out;
+  display:inline-block;
+  animation:floatIcon 3s infinite ease-in-out;
 }
 
 @keyframes floatIcon{
-0%{transform:translateY(0);}
-50%{transform:translateY(-8px);}
-100%{transform:translateY(0);}
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+  100%{transform:translateY(0);}
 }
 
 /* gallery */
-
 .gallery{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-margin-top:60px;
-padding-bottom:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:40px;
+  margin-top:60px;
+  padding-bottom:40px;
 }
 
 /* memory card */
-
 .memory-card{
-width:260px;
-height:320px;
-perspective:1000px;
-cursor:pointer;
+  width:260px;
+  height:320px;
+  perspective:1000px;
+  cursor:pointer;
+  opacity:0;
+  transform:scale(0.5);
 }
 
 .card-inner{
-position:relative;
-width:100%;
-height:100%;
-transition:transform 0.8s;
-transform-style:preserve-3d;
+  position:relative;
+  width:100%;
+  height:100%;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
 }
 
 .memory-card.flip .card-inner{
-transform:rotateY(180deg);
+  transform:rotateY(180deg);
 }
 
 /* front and back */
-
 .card-front,
 .card-back{
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(255,255,255,0.1);
-border-radius:20px;
-backface-visibility:hidden;
-backdrop-filter:blur(8px);
-overflow:hidden;
-box-shadow:0 0 15px rgba(0,0,0,0.2);
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,0.1);
+  border-radius:20px;
+  backface-visibility:hidden;
+  backdrop-filter:blur(8px);
+  overflow:hidden;
+  box-shadow:0 0 15px rgba(0,0,0,0.2);
 }
 
 /* photo frame */
-
 .photo-frame{
-width:100%;
-height:190px;
-background:#4c1d95;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:10px;
+  width:100%;
+  height:190px;
+  background:#4c1d95;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
 }
 
 .photo-frame img{
-max-width:100%;
-max-height:100%;
-object-fit:contain;
-border-radius:10px;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  border-radius:10px;
 }
 
 /* info */
-
 .info{
-padding:12px;
+  padding:12px;
 }
 
 .date{
-font-weight:bold;
-color:#ffd6ff;
-margin-top:4px;
+  font-weight:bold;
+  color:#ffd6ff;
+  margin-top:4px;
 }
 
 .desc{
-font-size:14px;
-opacity:0.9;
-margin-top:5px;
+  font-size:14px;
+  opacity:0.9;
+  margin-top:5px;
 }
 
 /* back side */
-
 .card-back{
-transform:rotateY(180deg);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-font-size:16px;
+  transform:rotateY(180deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  font-size:16px;
 }
 
 /* hover */
-
 .memory-card:hover{
-transform:translateY(-8px);
+  transform:translateY(-8px);
 }
 
 /* button */
-
 button{
-margin:40px 0;
-padding:14px 35px;
-font-size:17px;
-background:#c77dff;
-border:none;
-border-radius:25px;
-color:white;
-cursor:pointer;
-transition:0.3s;
+  margin:40px 0;
+  padding:14px 35px;
+  font-size:17px;
+  background:#c77dff;
+  border:none;
+  border-radius:25px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px #e0aaff;
-background:#e0aaff;
+  transform:scale(1.1);
+  box-shadow:0 0 20px #e0aaff;
+  background:#e0aaff;
 }
 
-/* floating background */
-
+/* floating animation */
 .floating{
-position:fixed;
-font-size:28px;
-animation:floatUp linear infinite;
-opacity:0.8;
+  position:fixed;
+  font-size:28px;
+  opacity:0.8;
+  pointer-events:none;
 }
 
-@keyframes floatUp{
-
-0%{
-transform:translateY(60vh) rotate(0deg);
-opacity:0;
-}
-
-30%{opacity:1;}
-
-100%{
-transform:translateY(-10vh) rotate(360deg);
-opacity:0;
-}
- 
-}
-@keyframes floatUp{
-
-0%{
-transform:translateY(60vh) rotate(0deg);
-opacity:0;
-}
-
-30%{
-opacity:1;
-}
-
-100%{
-transform:translateY(-10vh) rotate(360deg);
-opacity:0;
-}
-
-}
 </style>
 </head>
 
@@ -203,130 +163,95 @@ opacity:0;
 
 <div class="gallery">
 
-<!-- Memory 1 -->
+  <!-- Memory 1 -->
+  <div class="memory-card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="photo-frame">
+          <img src="symposium.jpg">
+        </div>
+        <div class="info">
+          <div class="date">April 25, 2024</div>
+          <div class="desc">Symposium day together</div>
+        </div>
+      </div>
+      <div class="card-back">
+        <p>Some days become memories,<br>some memories become treasures 💜</p>
+      </div>
+    </div>
+  </div>
 
-<div class="memory-card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
+  <!-- Memory 2 -->
+  <div class="memory-card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="photo-frame">
+          <img src="sportsday.jpg">
+        </div>
+        <div class="info">
+          <div class="date">May 4, 2025</div>
+          <div class="desc">Unexpected surprise from you – Sports Day</div>
+        </div>
+      </div>
+      <div class="card-back">
+        <p>The best surprises come<br>from the people we least expect 💫</p>
+      </div>
+    </div>
+  </div>
 
-<div class="card-front">
+  <!-- Memory 3 -->
+  <div class="memory-card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="photo-frame">
+          <img src="latenight.jpg">
+        </div>
+        <div class="info">
+          <div class="date">Late Night Talks</div>
+          <div class="desc">Talking until I leave from college</div>
+        </div>
+      </div>
+      <div class="card-back">
+        <p>Late night talks create<br>the deepest connections 🌙</p>
+      </div>
+    </div>
+  </div>
 
-<div class="photo-frame">
-<img src="symposium.jpg">
-</div>
+  <!-- Memory 4 -->
+  <div class="memory-card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="photo-frame">
+          <img src="leaving.jpg">
+        </div>
+        <div class="info">
+          <div class="date">June 12, 2024</div>
+          <div class="desc">That surprise when I was leaving college</div>
+        </div>
+      </div>
+      <div class="card-back">
+        <p>Goodbyes are not forever,<br>they are memories waiting to return 💜</p>
+      </div>
+    </div>
+  </div>
 
-<div class="info">
-<div class="date">April 25, 2024</div>
-<div class="desc">Symposium day together</div>
-</div>
-
-</div>
-
-<div class="card-back">
-<p>Some days become memories,<br>some memories become treasures 💜</p>
-</div>
-
-</div>
-</div>
-
-<!-- Memory 2 -->
-
-<div class="memory-card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-
-<div class="card-front">
-
-<div class="photo-frame">
-<img src="sportsday.jpg">
-</div>
-
-<div class="info">
-<div class="date">May 4, 2025</div>
-<div class="desc">Unexpected surprise from you – Sports Day</div>
-</div>
-
-</div>
-
-<div class="card-back">
-<p>The best surprises come<br>from the people we least expect 💫</p>
-</div>
-
-</div>
-</div>
-
-<!-- Memory 3 -->
-
-<div class="memory-card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-
-<div class="card-front">
-
-<div class="photo-frame">
-<img src="latenight.jpg">
-</div>
-
-<div class="info">
-<div class="date">Late Night Talks</div>
-<div class="desc">Talking until I leave from college</div>
-</div>
-
-</div>
-
-<div class="card-back">
-<p>Late night talks create<br>the deepest connections 🌙</p>
-</div>
-
-</div>
-</div>
-
-<!-- Memory 4 -->
-
-<div class="memory-card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-
-<div class="card-front">
-
-<div class="photo-frame">
-<img src="leaving.jpg">
-</div>
-
-<div class="info">
-<div class="date">June 12, 2024</div>
-<div class="desc">That surprise when I was leaving college</div>
-</div>
-
-</div>
-
-<div class="card-back">
-<p>Goodbyes are not forever,<br>they are memories waiting to return 💜</p>
-</div>
-
-</div>
-</div>
-
-<!-- Memory 5 -->
-
-<div class="memory-card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-
-<div class="card-front">
-
-<div class="photo-frame">
-<img src="birthdaycount.jpg">
-</div>
-
-<div class="info">
-<div class="date">November 13, 2024</div>
-<div class="desc">Your surprise for my 100 days to birthday</div>
-</div>
-
-</div>
-
-<div class="card-back">
-<p>Little surprises create<br>life's biggest memories ✨</p>
-</div>
-
-</div>
-</div>
+  <!-- Memory 5 -->
+  <div class="memory-card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="photo-frame">
+          <img src="birthdaycount.jpg">
+        </div>
+        <div class="info">
+          <div class="date">November 13, 2024</div>
+          <div class="desc">Your surprise for my 100 days to birthday</div>
+        </div>
+      </div>
+      <div class="card-back">
+        <p>Little surprises create<br>life's biggest memories ✨</p>
+      </div>
+    </div>
+  </div>
 
 </div>
 
@@ -337,29 +262,39 @@ Next Page 💜
 </button>
 
 <script>
+// GSAP popup animation for memory cards
+gsap.to(".memory-card", {
+  duration: 1,
+  opacity: 1,
+  scale: 1,
+  stagger: 0.2,
+  ease: "back.out(1.7)"
+});
 
-const icons=["💜","💖","✨","🌸","💫"];
+// Floating emojis (new animation: scale & float with random rotation)
+const emojis=["💜","💖","✨","🌸","💫"];
 
 function createFloating(){
-
-const el=document.createElement("div");
-el.className="floating";
-
-el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-
-el.style.left=Math.random()*100+"vw";
-el.style.fontSize=(20+Math.random()*20)+"px";
-el.style.animationDuration=(6+Math.random()*8)+"s";
-
-document.body.appendChild(el);
-
-setTimeout(()=>{
-el.remove();
-},12000);
-
+  const el=document.createElement("div");
+  el.className="floating";
+  el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=(20+Math.random()*25)+"px";
+  
+  document.body.appendChild(el);
+  
+  gsap.to(el, {
+    y: "-120vh",
+    rotation: Math.random()*720,
+    scale: Math.random()*0.5+0.75,
+    opacity:0,
+    duration: 6 + Math.random()*4,
+    ease:"power1.out",
+    onComplete: ()=> el.remove()
+  });
 }
 
-setInterval(createFloating,500);
+setInterval(createFloating, 400);
 
 </script>
 
