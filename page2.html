@@ -2,126 +2,137 @@
 <html>
 <head>
 <title>How We Met</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
 
 body{
-margin:0;
-font-family:Segoe UI;
-background:linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
-color:white;
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
+  color:white;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
 }
 
 /* card */
-
 .card{
-max-width:700px;
-padding:40px;
-border-radius:20px;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
-transition:0.4s;
-margin-bottom:30px;
+  max-width:700px;
+  padding:40px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  transition:0.4s;
+  margin-bottom:30px;
+  opacity:0;
+  transform:scale(0.5);
 }
 
 .card:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px #e0aaff;
+  transform:scale(1.05);
+  box-shadow:0 0 30px #e0aaff;
 }
 
 /* button */
-
 button{
-margin-top:25px;
-padding:12px 30px;
-background:#c77dff;
-border:none;
-border-radius:25px;
-color:white;
-cursor:pointer;
-font-size:16px;
-transition:0.3s;
+  margin-top:25px;
+  padding:12px 30px;
+  background:#c77dff;
+  border:none;
+  border-radius:25px;
+  color:white;
+  cursor:pointer;
+  font-size:16px;
+  transition:0.3s;
 }
 
 button:hover{
-box-shadow:0 0 20px #e0aaff;
-transform:scale(1.1);
-background:#e0aaff;
+  box-shadow:0 0 20px #e0aaff;
+  transform:scale(1.1);
+  background:#e0aaff;
 }
 
 /* memories section */
-
 .memories{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
-margin-top:20px;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:20px;
 }
 
 .memories img{
-width:180px;
-height:180px;
-object-fit:cover;
-border-radius:15px;
-transition:0.4s;
-border:3px solid rgba(255,255,255,0.3);
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:15px;
+  transition:0.4s;
+  border:3px solid rgba(255,255,255,0.3);
+  opacity:0;
+  transform:scale(0.5);
 }
 
 .memories img:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px #e0aaff;
+  transform:scale(1.1);
+  box-shadow:0 0 20px #e0aaff;
 }
 
 /* table tennis animation */
-
 .tt-area{
-width:570px;
-position:relative;
+  width:570px;
+  position:relative;
+  margin-top:40px;
 }
 
 .paddle{
-font-size:40px;
-position:absolute;
+  font-size:40px;
+  position:absolute;
 }
 
 .left{
-left:0;
-top:40px;
-animation:paddleMove 2s infinite alternate;
+  left:0;
+  top:40px;
+  animation:paddleMove 2s infinite alternate;
 }
 
 .right{
-right:0;
-top:40px;
-animation:paddleMove 2s infinite alternate-reverse;
+  right:0;
+  top:40px;
+  animation:paddleMove 2s infinite alternate-reverse;
 }
 
 .ball{
-position:absolute;
-font-size:25px;
-top:50px;
-left:50%;
-animation:ballMove 2s infinite linear;
+  position:absolute;
+  font-size:25px;
+  top:50px;
+  left:50%;
+  animation:ballMove 2s infinite linear;
 }
 
 /* animations */
-
 @keyframes paddleMove{
-0%{ transform:translateY(-10px);}
-100%{ transform:translateY(10px);}
+  0%{ transform:translateY(-10px);}
+  100%{ transform:translateY(10px);}
 }
 
 @keyframes ballMove{
-0%{ left:20px;}
-50%{ left:260px;}
-100%{ left:20px;}
+  0%{ left:20px;}
+  50%{ left:260px;}
+  100%{ left:20px;}
+}
+
+/* floating emojis */
+.floating{
+  position:fixed;
+  font-size:28px;
+  opacity:0.8;
+  pointer-events:none;
+  user-select:none;
 }
 
 </style>
@@ -142,33 +153,68 @@ a wonderful friendship started ✨
 </p>
 
 <!-- Memories Photos -->
-
 <h2>Our Memories 📸</h2>
 
 <div class="memories">
-
 <img src="photo1.jpg">
 <img src="photo2.jpg">
 <img src="photo3.jpg">
-
 </div>
+
 <a href="page3.html">
 <button>See Our Memories 💜</button>
 </a>
+
 <div class="tt-area">
-
-<div class="paddle left">🏓</div>
-
-<div class="ball">⚪</div>
-
-<div class="paddle right">🏓</div>
-
+  <div class="paddle left">🏓</div>
+  <div class="ball">⚪</div>
+  <div class="paddle right">🏓</div>
+</div>
 
 </div>
 
-<!-- Table Tennis Animation -->
+<script>
+// GSAP popup animation for card
+gsap.to(".card", {
+  duration:1,
+  opacity:1,
+  scale:1,
+  ease:"back.out(1.7)"
+});
 
-</div>
+// GSAP popup animation for memory images
+gsap.to(".memories img", {
+  duration:1,
+  opacity:1,
+  scale:1,
+  stagger:0.2,
+  ease:"back.out(1.7)"
+});
+
+// Floating emojis in the background
+const emojis=["💜","💖","✨","🌸","💫"];
+function createFloating(){
+  const el=document.createElement("div");
+  el.className="floating";
+  el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=(20+Math.random()*25)+"px";
+  
+  document.body.appendChild(el);
+  
+  gsap.to(el,{
+    y:"-120vh",
+    rotation:Math.random()*720,
+    scale:Math.random()*0.5+0.75,
+    opacity:0,
+    duration:6 + Math.random()*4,
+    ease:"power1.out",
+    onComplete:()=> el.remove()
+  });
+}
+setInterval(createFloating, 400);
+
+</script>
 
 </body>
 </html>
